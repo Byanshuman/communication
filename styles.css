@@ -1,0 +1,698 @@
+/* =========================================
+   1. VARIABLES & SETUP
+   ========================================= */
+:root {
+    /* Color Palette (Light Mode Default) */
+    --bg-body: #f8f9fa;
+    /* Light gray, easier on eyes than pure white */
+    --bg-paper: #ffffff;
+    /* The reading container background */
+    --text-primary: #2c3e50;
+    /* Dark blue-grey for main text */
+    --text-secondary: #566b78;
+    --accent-color: #3498db;
+    /* Your blue accent */
+    --border-color: #e0e0e0;
+
+    /* Spacing & Layout */
+    --reading-width: 68ch;
+    /* ~68 characters per line (Goldilocks ratio) */
+    --container-padding: clamp(1rem, 5vw, 2.5rem);
+
+    /* Typography */
+    --font-heading: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-body: 'Georgia', 'Cambria', 'Times New Roman', serif;
+    /* Serif is better for long reading */
+    --line-height: 1.7;
+}
+
+/* DARK MODE SUPPORT (Matches your screenshot) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-body: #121212;
+        --bg-paper: #1e1e1e;
+        --text-primary: #e0e0e0;
+        --text-secondary: #b0b3b8;
+        --accent-color: #6ab0eb;
+        --border-color: #333333;
+    }
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   2. CORE TYPOGRAPHY & BODY
+   ========================================= */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: var(--line-height);
+    font-size: 18px;
+    /* Slightly larger base size for readability */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* HEADINGS */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+/* =========================================
+   3. LAYOUT CONTAINER (Alignment Fix)
+   ========================================= */
+main {
+    width: 100%;
+    /* This fixes the wide text issue */
+    max-width: var(--reading-width);
+    /* This centers the content */
+    margin: 0 auto;
+    padding: var(--container-padding);
+    background-color: var(--bg-paper);
+    min-height: 100vh;
+}
+
+/* HEADER SECTION */
+header {
+    text-align: center;
+    padding: 3rem 0 2rem 0;
+    /* Balanced vertical spacing */
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    /* Fluid font size */
+    font-weight: 700;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   4. READING CONTENT
+   ========================================= */
+section {
+    margin-bottom: 4rem;
+    /* distinct separation between chapters */
+}
+
+h2 {
+    font-size: 1.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--accent-color);
+    margin-top: 2rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    /* Ensure left align for readability */
+}
+
+ul,
+ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+a:hover {
+    border-bottom-color: var(--accent-color);
+}
+
+/* =========================================
+   5. CHAPTER TABLE (Desktop)
+   ========================================= */
+.chapter-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-family: var(--font-heading);
+}
+
+.chapter-table th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.chapter-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.chapter-table tr:hover td {
+    background-color: rgba(0, 0, 0, 0.02);
+    /* Very subtle hover effect */
+}
+
+/* "Print Chapter List" Button Styling */
+button,
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+/* =========================================
+   6. MOBILE OPTIMIZATION
+   ========================================= */
+@media (max-width: 768px) {
+    :root {
+        --container-padding: 20px;
+    }
+
+    body {
+        font-size: 16px;
+        /* Slightly smaller text for mobile */
+    }
+
+    /* Adjust Header */
+    header {
+        padding: 2rem 0 1.5rem 0;
+        margin-bottom: 2rem;
+    }
+
+    /* Transform Table to Cards for Mobile */
+    .chapter-table,
+    .chapter-table tbody,
+    .chapter-table tr,
+    .chapter-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .chapter-table thead {
+        display: none;
+        /* Hide header row on mobile */
+    }
+
+    .chapter-table tr {
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .chapter-table td {
+        padding: 0.5rem 0;
+        border-bottom: none;
+        text-align: left;
+    }
+
+    /* Make the Chapter Number stand out */
+    .chapter-table td:first-child {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-bottom: 0.2rem;
+    }
+
+    /* Make title larger */
+    .chapter-table td:nth-child(2) {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+}
+
+header p {
+    text-align: center !important;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================
+   1. VARIABLES (FORCED LIGHT DEFAULT)
+   ========================================= */
+:root {
+    /* Light Mode Variables (Default) */
+    --bg-body: #f8f9fa;
+    --bg-paper: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #566b78;
+    --accent-color: #3498db;
+    --border-color: #e0e0e0;
+
+    /* Layout */
+    --reading-width: 68ch;
+    --container-padding: clamp(1rem, 5vw, 2.5rem);
+
+    /* Typography */
+    --font-heading: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-body: 'Georgia', 'Cambria', 'Times New Roman', serif;
+    --line-height: 1.7;
+}
+
+/* DARK MODE (Only active if class .theme-dark is present) */
+body.theme-dark {
+    --bg-body: #121212;
+    --bg-paper: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b3b8;
+    --accent-color: #6ab0eb;
+    --border-color: #333333;
+}
+
+/* SEPIA MODE */
+body.theme-sepia {
+    --bg-body: #f4ecd8;
+    --bg-paper: #fdf6e3;
+    --text-primary: #433422;
+    --text-secondary: #756249;
+    --accent-color: #b58900;
+    --border-color: #eaddc5;
+}
+
+/* =========================================
+   2. BASE STYLES
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: var(--line-height);
+    font-size: 18px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* =========================================
+   3. LAYOUT & HEADER
+   ========================================= */
+main {
+    width: 100%;
+    max-width: var(--reading-width);
+    margin: 0 auto;
+    padding: var(--container-padding);
+    background-color: var(--bg-paper);
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 1rem 2rem 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+/* =========================================
+   4. CONTENT & TABLE
+   ========================================= */
+h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    border-bottom: 3px solid var(--accent-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.chapter-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-family: var(--font-heading);
+}
+
+.chapter-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+/* Mobile Cards */
+@media (max-width: 768px) {
+    .chapter-table thead {
+        display: none;
+    }
+
+    .chapter-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .chapter-table td {
+        display: block;
+        padding: 4px 0;
+        border: none;
+    }
+
+    .chapter-table td:first-child {
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+}
+
+/* =========================================
+   1. VARIABLES & SETUP
+   ========================================= */
+:root {
+    /* Light Mode */
+    --bg-body: #f8f9fa;
+    --bg-paper: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #566b78;
+    --accent-color: #3498db;
+    --border-color: #e0e0e0;
+    /* Animation Color (Subtle Grey) */
+    --particle-color: rgba(0, 0, 0, 0.08);
+
+    /* Layout */
+    --reading-width: 68ch;
+    --container-padding: clamp(1rem, 5vw, 2.5rem);
+
+    /* Typography */
+    --font-heading: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-body: 'Georgia', 'Cambria', 'Times New Roman', serif;
+    --line-height: 1.7;
+}
+
+/* Dark Mode Override */
+body.theme-dark {
+    --bg-body: #121212;
+    --bg-paper: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b3b8;
+    --accent-color: #6ab0eb;
+    --border-color: #333333;
+    /* Animation Color (Subtle White) */
+    --particle-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Sepia Mode Override */
+body.theme-sepia {
+    --bg-body: #f4ecd8;
+    --bg-paper: #fdf6e3;
+    --text-primary: #433422;
+    --text-secondary: #756249;
+    --accent-color: #b58900;
+    --border-color: #eaddc5;
+    --particle-color: rgba(67, 52, 34, 0.08);
+}
+
+/* =========================================
+   2. BASE STYLES
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: var(--line-height);
+    font-size: 18px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    overflow-x: hidden;
+    /* Prevent scrollbar from moving particles */
+}
+
+main {
+    width: 100%;
+    max-width: var(--reading-width);
+    margin: 0 auto;
+    padding: var(--container-padding);
+    background-color: var(--bg-paper);
+    min-height: 100vh;
+    position: relative;
+    z-index: 10;
+    /* Ensures text sits ON TOP of animation */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    /* Adds slight depth */
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 1rem 2rem 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    border-bottom: 3px solid var(--accent-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.chapter-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-family: var(--font-heading);
+}
+
+.chapter-table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+/* Mobile Cards */
+@media (max-width: 768px) {
+    .chapter-table thead {
+        display: none;
+    }
+
+    .chapter-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .chapter-table td {
+        display: block;
+        padding: 4px 0;
+        border: none;
+    }
+
+    .chapter-table td:first-child {
+        font-weight: bold;
+        color: var(--accent-color);
+    }
+}
+
+/* =========================================
+   3. BACKGROUND ANIMATION CSS
+   ========================================= */
+#bg-animation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Behind the text */
+    pointer-events: none;
+    /* Mouse clicks go through it */
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--particle-color);
+    /* Changes based on theme */
+    opacity: 0;
+    animation: floatUp 20s linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ==================================================
+   WIDE SCREEN FIX (Paste at bottom of style.css)
+   ================================================== */
+
+/* 1. Make the main white box wider */
+main {
+    max-width: 1200px !important;
+    /* Forces box to expand */
+    width: 95%;
+    /* Fits nicely on slightly smaller screens */
+}
+
+/* 2. Keep reading text from stretching too wide (Readability) */
+p,
+li {
+    max-width: 800px;
+    margin-right: auto;
+    /* Keeps text aligned to the left */
+}
+
+/* 3. Let the table expand to fill the whole new space */
+.chapter-table {
+    width: 100%;
+}
+
+/* 4. Ensure the search box and buttons stay centered/aligned */
+.js-controls {
+    max-width: 100% !important;
+    /* Allow controls to use full width if needed */
+}
+
+/* ==================================================
+   FIX: PREVENT SEARCH & THEME BUTTON OVERLAP
+   ================================================== */
+.js-controls {
+    /* 1. Force Flexbox layout so they sit side-by-side */
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    /* Allows wrapping on tiny screens */
+
+    /* 2. Add a hard gap between them */
+    gap: 20px !important;
+
+    /* 3. Center them and match the page width */
+    width: 100% !important;
+    max-width: 1200px !important;
+    /* Matches your new wide layout */
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto 30px auto !important;
+    padding: 0 20px !important;
+    /* Prevents touching screen edges */
+}
+
+.js-input {
+    /* 4. Stop the search box from growing infinitely */
+    flex: 1 !important;
+    /* Takes up available space */
+    min-width: 250px !important;
+    /* But never gets smaller than this */
+    max-width: 600px !important;
+    /* And never wider than this (readability) */
+}
+
+.js-btn {
+    /* 5. Stop the button from being squashed */
+    flex-shrink: 0 !important;
+    width: auto !important;
+}
