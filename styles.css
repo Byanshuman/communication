@@ -696,3 +696,24 @@ li {
     flex-shrink: 0 !important;
     width: auto !important;
 }
+
+/* =========================================
+   OLED THEME SUPPORT (Paste at bottom)
+   ========================================= */
+body.theme-oled {
+    --bg-body: #000000;
+    --bg-paper: #000000;
+    /* Pure Black */
+    --text-primary: #ffffff;
+    /* Pure White */
+    --text-secondary: #a0a0a0;
+    --accent-color: #3498db;
+    --border-color: #333333;
+    --particle-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Remove shadow and add subtle border for OLED */
+body.theme-oled main {
+    box-shadow: none !important;
+    border: 1px solid #333333 !important;
+}
